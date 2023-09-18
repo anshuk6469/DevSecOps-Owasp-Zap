@@ -21,9 +21,9 @@ pipeline {
                 always {
                     junit 'target/surefire-reports/*.xml'
                       jacoco (
-                         execPattern: 'target/*.exec',
-                         classPattern: 'target/classes',
-                         sourcePattern: 'src/main/java/com/devsecops'
+                         execPattern: '**/target/jacoco.exec',
+                         classPattern: '**/target/classes',
+                         sourcePattern: '**/src/main/java/com/devsecops'
                      )
                   }
              }
