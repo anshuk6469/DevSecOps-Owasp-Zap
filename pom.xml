@@ -60,18 +60,11 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.10</version>
-				<configuration>
-                   <dataFile>target/jacoco.exec</dataFile>
-                </configuration>
 				<executions>
 				 <execution>
 				   <goals>
 				     <goal>prepare-agent</goal>
-				   </goals>
-				   <configuration>
-                        <propertyName>jacoco.agent.argLine</propertyName>
-                        <destFile>target/jacoco.exec</destFile>
-                   </configuration>  
+				   </goals> 
 				 </execution>
 				<execution>
 				  <id>report</id>
