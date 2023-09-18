@@ -24,7 +24,6 @@ pipeline {
                          execPattern: 'target/*.exec',
                          classPattern: 'target/classes',
                          sourcePattern: 'src/main/java/com/devsecops'
-                         exclusionPattern: 'src/test*'
                      )
                   }
              }
