@@ -10,6 +10,7 @@ pipeline {
             steps {
                 git branch: 'main', url: 'https://github.com/anshuk6469/nodejs-app2.git'
                 sh "mvn clean package -DskipTests=true"
+                archive 'target/*.jar'
             }
         }
            stage('Test') {
@@ -19,7 +20,7 @@ pipeline {
             post{
                 always {
                     junit 'target/surefire-reports/*.xml'
-                    jacoco execPattern: 'tareget/jacoco.exec'
+                    jacoco execPattern: 'target/jacoco.exec'
                   }
              }
         }
