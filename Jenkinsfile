@@ -34,12 +34,25 @@ pipeline {
                 }
              }
         }
-           stage('SonarQube Test- SAST') {
-            steps {
-                sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.projectName='numeric-application' -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_fb8abe02bd2bc73e06229737fb86ddb2b02749ee"
+ //          stage('SonarQube Test- SAST') {
+//            steps {
+//                sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.projectName='numeric-application' -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_fb8abe02bd2bc73e06229737fb86ddb2b02749ee"
+//            }
+//        }
+
+            stage('SonarQube - SAST') {
+                steps {
+                    withSonarQubeEnv('SonarQube') {
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.projectName='numeric-application' -Dsonar.host.url=http://localhost:9000 "
+                    }
+                    timeout(time: 2, unit: 'MINUTES') {
+                    script {
+                        waitForQualityGate abortPipeline: true
+                    }
+                  }
+                }
             }
-        }
-        
+                    
            stage('Docker Build and Push') {
             steps {
               withDockerRegistry([credentialsId: "docker-hub", url: "https://quay.io/"]) {
